@@ -2,8 +2,6 @@
 
 ## Requirements
 
-- ext gd
-- ext fileinfo
 - PHP 7.2.5 +
 
 # Dev
