@@ -1,0 +1,63 @@
+{% extends 'frontend_base.html.twig' %}
+
+{# Page Meta title #}
+{% set title = " Les universités" %}
+{% set description = "La liste des universités" %}
+{% set keywords = " Bénin, epreuves, pdf, université, école, filière"%}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+{% block content %}
+{% for university in universities %}
+    <div class="col mb-5">
+        <div class="card h-100">
+            <img src="{{ asset("uploads/logo/" ~ university.logo) }}" alt="{{university.name}}">
+                <div class="card-body p-2">
+                    <div class="text-center">
+                        <h5 class="fw-bolder">{{ university.name }}</h5>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('app_school_active_from_university_index', {'id': university.id}) }}">Visiter les écoles </a></div>
+                </div>
+        </div>
+    </div> 
+{% else %}
+    <div class="text-center">
+        <h4>Aucune université trouvée </h4>
+    </div>
+{% endfor %}
+{% endblock %}

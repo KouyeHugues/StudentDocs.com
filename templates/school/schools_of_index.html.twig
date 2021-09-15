@@ -1,0 +1,142 @@
+{% extends 'backend_base.html.twig' %}
+
+
+{# Page Meta title #}
+{% set title = "Voir les écoles de l'université" %}
+{% set description = "Les écoles de l'université" %}
+{% set keywords = "schoolen, Bénin, epreuves, pdf, université, ecole, filière"%}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}
+{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Les Ecoles</h4>
+					<p class="card-description">
+						Table de toutes les ecoles ajoutées de {{university.name}}. &nbsp;
+						<div class="template-demo">
+                            <div class="btn-group col-12" role="group" aria-label="Basic schoolple">
+							    <div class="text-center col-6">
+						           <a href="{{ path('app_university_index') }}" class="btn btn-info my-4"><i class="mdi mdi-keyboard-return"></i> Retour à la table des universités</a>
+					        </div>
+							    <div class="text-center col-6">
+						           <a href="{{ path('app_school_new') }}" class="btn btn-primary my-4">Ajouter une nouvelle école</a>
+					        </div>
+						</div>
+					</p>
+					<div class="table-responsive" >
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+                                    <th>Nom</th>
+                                    <th>Logo</th>
+                                    <th>Université</th>
+                                    <th>Examens</th>
+                                    <th>Date d'ajout</th>
+                                    <th>Date de modification</th>
+                                    <th>Actif</th>
+                                    <th>Modifier</th>
+				                    <th>Activer</th>
+				                    <th>Suppression</th>
+				    			</tr>
+							</thead>
+							<tbody>
+								{% for school in schools %}
+                                    {% if school.isActive %}
+                                        {% set activeBadge = "badge badge-success" %}
+                                     {% else %}
+                                         {% set activeBadge = "badge badge-warning" %}
+                                     {% endif %}
+                                    <tr>
+                                        <td>{{ school.id }}</td>
+                                        <td>{{ school.name }}</td>
+                                        <td>
+                                            <img src="{{ asset("uploads/logo/" ~ school.logo) }}" alt="{{school.name}}">
+                                        </td>
+                                        <td>{{ school.parentUniversity ? school.parentUniversity.name : '' }}</td>
+										<td>
+											<a title="Voir les examens de l'école" class="btn" href="{{ path('app_exams_from_school_index', {'id': school.id}) }}">
+												<i class="mdi mdi-eye"></i>
+											</a>
+										</td>
+                                        <td>{{ school.addedAt ? school.addedAt|date('d/m/Y à H:i:s') : '' }}</td>
+                                        <td>{{ school.updatedAt ? school.updatedAt|date('d/m/Y H:i:s') : '' }}</td>
+                                        <td><span class="{{activeBadge}}">{{ school.isActive ? 'Oui' : 'Non' }}</span></td>
+										<td>
+											<a title="Mettre à jour" class="btn" href="{{ path('app_school_edit', {'id': school.id}) }}">
+												<i class="mdi mdi-lead-pencil"></i>
+											</a>
+										</td>
+										<td>
+											{% if school.isActive %}
+                                                {{ include('school/_desactivate_form.html.twig') }}
+                                            {% else %}
+                                                {{ include('school/_activate_form.html.twig') }}
+                                            {% endif %}
+										</td>
+										<td>
+											 {{ include('school/_delete_form.html.twig') }}
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="10">Aucune école trouvée</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table> <br>
+						{#{{ knp_pagination_render(universities, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+}) }}#}
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_school_activate', {'id': school.id}) }}" onsubmit="return confirm('Voulez vous activer cette école ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('activate' ~ school.id) }}">
+    <button title="Activer pour le rendre public" class="btn badge badge-success">Activer</button>
+</form>

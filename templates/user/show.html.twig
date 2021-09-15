@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{# Page Meta title #}
+{% set title = "Voir l'utlisateur" %}
+{% set description = "Voir l'utilisateur" %}
+{% set keywords = " Bénin, epreuves, pdf, université, école, filière"%}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+
+
+
+{% block title %}User{% endblock %}
+
+{% block body %}
+    <h1>User</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user.id }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ user.email }}</td>
+            </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>Password</th>
+                <td>{{ user.password }}</td>
+            </tr>
+            <tr>
+                <th>FullName</th>
+                <td>{{ user.fullName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_user_index') }}">back to list</a>
+
+    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+
+    {{ include('user/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,42 @@
+{{ form_start(form) }}
+{{ form_widget(form._token) }}
+<div class="row">
+	<div class="col-lg-4">
+		<div class="form-group">
+			<label class="form-control-label">Nom de l'examen</label>
+			{{ form_widget(form.name, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="form-group">
+			<label class="form-control-label">Année de l'examen</label>
+			{{ form_widget(form.academicYear, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+	<div class="col-lg-4">
+		<div class="form-group">
+			<label class="form-control-label">Importer le fichier</label>
+			{{ form_widget(form.fileName, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label class="form-control-label">Nom de l'université</label>
+			{{ form_widget(form.parentUniversity, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label class="form-control-label">Nom de l'école</label>
+			{{ form_widget(form.parentSchool, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+</div>
+<div class="text-center">
+	<button type="submit" class="btn btn-primary my-4">{{button_label}}</button>
+</div>
+{{ form_end(form, {render_rest: false}) }}
+
+

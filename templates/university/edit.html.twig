@@ -1,0 +1,75 @@
+{% extends 'backend_base.html.twig' %}
+
+
+{# Page Meta title #}
+{% set title = "Modification des informations de " ~ university.name %}
+{% set description = university.name %}
+{% set keywords = university.name ~ "concours, Bénin, epreuves, pdf, université, ecole, filière "%}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+{% block stylesheets %}
+{{parent()}}
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha256-V8SV2MO1FUb63Bwht5Wx9x6PVHNa02gv8BgH/uH3ung=" crossorigin="anonymous">
+{% endblock %}
+
+
+{% block content %}
+	<div class="col-md-12 grid-margin stretch-card">
+		<div class="card">
+			<div class="card-body">
+				<h4 class="card-title">Modification des informations de {{university.name}}</h4>
+				 {{ include('university/_form.html.twig', {'button_label': 'Modifier'}) }}
+                <p class="card-description">
+					<div class="text-center">
+						<a href="{{ path('app_university_index') }}" class="btn btn-info my-4"><i class="mdi mdi-keyboard-return"></i>Retour à la table des universités</a>
+					</div>
+				</p>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+{{parent()}}
+
+{# Jquery utilities #}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha256-F/Xda58SPdcUCr+xhSGz9MA2zQBPb0ASEYKohl8UCHc=" crossorigin="anonymous"></script>
+{% endblock %}
+

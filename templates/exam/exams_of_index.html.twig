@@ -1,0 +1,137 @@
+{% extends 'backend_base.html.twig' %}
+
+
+{# Page Meta title #}
+{% set title = "Voir les examens de l'école" %}
+{% set description = "Voir les examens de l'école" %}
+{% set keywords = "examen, Bénin, epreuves, pdf, université, ecole, filière"%}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}
+{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Les Examents de {{school.name}}</h4>
+					<p class="card-description">
+						Table de tous les examens ajoutés de {{school.name}}. &nbsp;
+						<div class="template-demo">
+                            <div class="btn-group col-12" role="group" aria-label="Basic example">
+							    <div class="text-center col-6">
+								<a href="{{ path('app_school_index') }}" class="btn btn-info my-4"><i class="mdi mdi-keyboard-return"></i> Retour à la table des écoles</a>
+								</div>
+							    <div class="text-center col-6">
+						           <a href="{{ path('app_exam_new') }}" class="btn btn-primary my-4">Importer un nouveau fichier</a>
+					        </div>
+					        </div>
+						</div>
+					</p>
+					<div class="table-responsive" >
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+                                    <th>Nom</th>
+                                    <th>Fichier</th>
+                                    <th>Université</th>
+                                    <th>Ecole</th>
+                                    <th>Année de l'examen</th>
+                                    <th>Date d'ajout</th>
+                                    <th>Date de modification</th>
+                                    <th>Actif</th>
+                                    <th>Modifier</th>
+				                    <th>Activer</th>
+				                    <th>Suppression</th>
+				    			</tr>
+							</thead>
+							<tbody>
+								{% for exam in exams %}
+                                    {% if exam.isActive %}
+                                        {% set activeBadge = "badge badge-success" %}
+                                     {% else %}
+                                         {% set activeBadge = "badge badge-warning" %}
+                                     {% endif %}
+                                    <tr>
+                                        <td>{{ exam.id }}</td>
+                                        <td>{{ exam.name }}</td>
+                                        <td>
+                                             <a class="badge badge-primary"  href="{{ asset("uploads/pdf/" ~ exam.fileName) }}">Télécharger(PDF)</a>
+                                        </td>
+                                        <td>{{ exam.parentUniversity ? exam.parentUniversity.name : '' }}</td>
+                                        <td>{{ exam.parentSchool ? exam.parentSchool.name : '' }}</td>
+                                        <td>{{ exam.academicYear}}</td>
+                                        <td>{{ exam.addedAt ? exam.addedAt|date('d/m/Y à H:i:s') : '' }}</td>
+                                        <td>{{ exam.updatedAt ? exam.updatedAt|date('d/m/Y H:i:s') : '' }}</td>
+                                        <td><span class="{{activeBadge}}">{{ exam.isActive ? 'Oui' : 'Non' }}</span></td>
+										<td>
+											<a title="Mettre à jour" class="btn" href="{{ path('app_exam_edit', {'id': exam.id}) }}">
+												<i class="mdi mdi-lead-pencil"></i>
+											</a>
+										</td>
+										<td>
+											{% if exam.isActive %}
+                                                {{ include('exam/_desactivate_form.html.twig') }}
+                                            {% else %}
+                                                {{ include('exam/_activate_form.html.twig') }}
+                                            {% endif %}
+										</td>
+										<td>
+											 {{ include('exam/_delete_form.html.twig') }}
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="12">Aucun examen trouvé</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table> <br>
+						{#{{ knp_pagination_render(universities, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+}) }}#}
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+{% endblock %}
+

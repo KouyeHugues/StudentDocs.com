@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_exam_desactivate', {'id': exam.id}) }}" onsubmit="return confirm('Voulez vous désactiver cet examen ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('desactivate' ~ exam.id) }}">
+    <button title="Désactiver pour ne pas le rendre public" class="btn badge badge-warning">Désactiver</button>
+</form>

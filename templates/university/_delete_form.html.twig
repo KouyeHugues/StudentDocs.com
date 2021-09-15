@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_university_delete', {'id': university.id}) }}" onsubmit="return confirm(''Voulez vous vraiment supprimer cette université ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ university.id) }}">
+    <button  title="Supprimer du système" class="btn badge badge-danger">Supprimer</button>
+</form>

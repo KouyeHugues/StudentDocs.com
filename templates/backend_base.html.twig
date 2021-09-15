@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/feather/feather.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/ti-icons/css/themify-icons.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/css/vendor.bundle.base.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/datatables.net-bs4/dataTables.bootstrap4.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/ti-icons/css/themify-icons.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/js/select.dataTables.min.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/css/vertical-layout-light/style.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/mdi/css/materialdesignicons.min.css')}}"/>
+{% endblock %}
+
+
+{% block body %}
+	<div class="container-scroller">
+		{% include "partials/_navbar_back.html.twig" %}
+		<div class="container-fluid page-body-wrapper">
+			{% include "partials/_sidebar_back.html.twig" %}
+			<div class="main-panel">
+				<div class="content-wrapper">
+					{% block content %}{% endblock %}
+				</div>
+				{% include "partials/_footer_back.html.twig" %}
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{asset('themes/back/vendors/js/vendor.bundle.base.js')}}"></script>
+	<script src="{{asset('themes/back/vendors/chart.js/Chart.min.jss')}}"></script>
+	<script src="{{asset('themes/back/vendors/datatables.net/jquery.dataTables.js')}}"></script>
+	<script src="{{asset('themes/back/vendors/datatables.net-bs4/dataTables.bootstrap4.js')}}"></script>
+	<script src="{{asset('themes/back/js/dataTables.select.min.js')}}"></script>
+	<script src="{{asset('themes/back/js/off-canvas.js')}}"></script>
+	<script src="{{asset('themes/back/js/hoverable-collapse.js')}}"></script>
+	<script src="{{asset('themes/back/js/template.js')}}"></script>
+
+	<script src="{{asset('themes/back/js/dashboard.js')}}"></script>
+	<script src="{{asset('themes/back/js/Chart.roundedBarCharts.js')}}"></script>
+{% endblock %}
+
+

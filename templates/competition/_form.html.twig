@@ -1,0 +1,38 @@
+{{ form_start(form) }}
+{{ form_widget(form._token) }}
+<div class="row">
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label class="form-control-label">Nom du coucours</label>
+			{{ form_widget(form.name, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label class="form-control-label">Domaine</label>
+			{{ form_widget(form.domain, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label class="form-control-label">Année du coucours</label>
+			{{ form_widget(form.academicYear, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+	<div class="col-lg-6">
+		<div class="form-group">
+			<label class="form-control-label">Importer le fichier</label>
+			{{ form_widget(form.fileName, {"attr":{"class": "form-control"}}) }}
+		</div>
+	</div>
+</div>
+<div class="text-center">
+	<button type="submit" class="btn btn-primary my-4">{{button_label}}</button>
+</div>
+{{ form_end(form, {render_rest: false}) }}
+
+
+

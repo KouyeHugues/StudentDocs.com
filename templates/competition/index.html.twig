@@ -1,0 +1,132 @@
+{% extends 'backend_base.html.twig' %}
+
+
+{# Page Meta title #}
+{% set title = "Gestion des coucous" %}
+{% set description = "Gestion des concours" %}
+{% set keywords = "concours, Bénin, epreuves, pdf, université, ecole, filière"%}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}
+{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-lg-12 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Universités</h4>
+					<p class="card-description">
+						Table des cooncours ajoutés sur le site. &nbsp;
+						<div class="template-demo">
+                            <div class="btn-group col-12" role="group" aria-label="Basic example">
+							    <div class="text-center">
+						            <a href="{{ path('app_competition_new') }}" class="btn btn-info my-4"><i class="mdi mdi-keyboard-return"></i>Importer un nouveau fichier</a>
+					        </div>
+						</div>
+					</p>
+					<div class="table-responsive" >
+						<table class="table table-bordered">
+							<thead>
+								<tr>
+									<th>ID</th>
+                                    <th>Nom</th>
+                                    <th>Domaine</th>
+                                    <th>Fichier</th>
+                                    <th>Année du concours</th>
+                                    <th>Date d'ajout</th>
+                                    <th>Date de modification</th>
+                                    <th>Actif</th>
+                                    <th>Modifier</th>
+				                    <th>Activer</th>
+				                    <th>Suppression</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for competition in competitions %}
+                                    {% if competition.isActive %}
+                                        {% set activeBadge = "badge badge-success" %}
+                                     {% else %}
+                                         {% set activeBadge = "badge badge-warning" %}
+                                     {% endif %}
+                                    <tr>
+                                        <td>{{ competition.id }}</td>
+                                        <td>{{ competition.name }}</td>
+                                        <td>{{ competition.domain }}</td>
+                                        <td>
+                                             <a class="badge badge-primary" href="{{ asset("uploads/pdf/" ~ competition.fileName) }}">Télécharger(PDF)</a>
+                                        </td>
+                                        <td>{{ competition.academicYear}}</td>
+                                        <td>{{ competition.addedAt ? competition.addedAt|date('d/m/Y à H:i:s') : '' }}</td>
+                                        <td>{{ competition.updatedAt ? competition.updatedAt|date('d/m/Y H:i:s') : '' }}</td>
+                                        <td><span class="{{activeBadge}}">{{ competition.isActive ? 'Oui' : 'Non' }}</span></td>
+										<td>
+											<a title="Mettre à jour" class="btn" href="{{ path('app_competition_edit', {'id': competition.id}) }}">
+												<i class="mdi mdi-lead-pencil"></i>
+											</a>
+										</td>
+										<td>
+											{% if competition.isActive %}
+                                                {{ include('competition/_desactivate_form.html.twig') }}
+                                            {% else %}
+                                                {{ include('competition/_activate_form.html.twig') }}
+                                            {% endif %}
+										</td>
+										<td>
+											 {{ include('competition/_delete_form.html.twig') }}
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="11">Aucun concours trouvé</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table> <br>
+						{#{{ knp_pagination_render(universities, null, {}, {
+   'align': 'center',
+   'size': 'large',
+   'rounded': true,
+}) }}#}
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+{% endblock %}
+
+

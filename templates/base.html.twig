@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+	<head>
+		{% set site_name = "StudentDoc" %}
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="Unive">
+		<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('img/logo.jpg')}}">
+		<link rel="icon" type="image/x-icon" href="{{ asset('img/logo.jpg')}}"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+		<meta name="author" content="">
+		<title>
+			{% block title %}{% endblock %}
+			~
+			{{site_name}}</title>
+		<link rel="canonical" href="https://studentdocs.com/"/>
+		<meta name="keywords" content="{% block keywords %}{% endblock %}">
+		<meta name="description" content="{% block description %}{% endblock %}">
+		<meta itemprop="name" content="{{site_name}}">
+		<meta itemprop="description" content="{% block schema_description %}{% endblock %}">
+		<meta itemprop="image" content="/">
+		<meta name="twitter:card" content="{{site_name}}">
+		<meta name="twitter:site" content="@{{site_name}}">
+		<meta name="twitter:title" content="{% block twitter_title %}{% endblock %}">
+		<meta name="twitter:description" content="{% block twitter_description %}{% endblock %}">
+		<meta name="twitter:creator" content="@{{site_name}}">
+		<meta name="twitter:image" content="">
+		<meta property="fb:app_id" content="">
+		<meta property="og:title" content="{% block fb_title %}{% endblock %}"/>
+		<meta property="og:type" content="website"/>
+		<meta property="og:url" content="https://studentdocs.com/"/>
+		<meta property="og:image" content="{% block og_image %}{% endblock %}"/>
+		<meta property="og:description" content="{% block open_graph_description %}{% endblock %}"/>
+		<meta
+		property="og:site_name" content="{{site_name}}"/>
+
+		{# Stylesheets #}
+		{% block stylesheets %}
+			{#{{ encore_entry_link_tags('app') }}#}
+		{% endblock %}
+
+	</head>
+	<body id="{% block bodyid %}{% endblock %}" class="{% block bodyclass %}{% endblock %}"> 
+	{% block body %}{% endblock %}
+
+
+		{# Javascripts #}
+		{% block javascripts %}
+			{#{{ encore_entry_script_tags('app') }}#}
+		{% endblock %}
+	</body>
+</html>

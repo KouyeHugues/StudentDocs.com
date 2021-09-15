@@ -1,0 +1,33 @@
+<nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
+	<div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+		<a class="navbar-brand brand-logo mr-5" href="{{path('app_home')}}">StudentDocs</a>
+		<a class="navbar-brand brand-logo-mini" href="{{path('app_home')}}">studentdocs</a>
+	</div>
+	<div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
+		<button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+			<span class="icon-menu"></span>
+		</button>
+		<ul class="navbar-nav mr-lg-2"></ul>
+		<ul class="navbar-nav navbar-nav-right">
+			<li class="nav-item nav-profile dropdown">
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+					<img src="{{asset('img/user.svg')}}" alt="{{app.user ? app.user.fullName: 'Mon compte'}}"/>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+					<a href="{{path('app_dashboard_index')}}" class="dropdown-item">
+						<i class="ti-home text-primary"></i>
+						Tableau de bord
+					</a>
+						<a href="{{path('app_home')}}" class="dropdown-item">
+							<i class="ti-home text-primary"></i>
+							Page d'accueil
+						</a>
+					<a href="{{path('app_logout')}}" class="dropdown-item">
+						<i class="ti-power-off text-primary"></i>
+						Se déconnecter
+					</a>
+				</div>
+			</li>
+		</ul>
+	</div>
+</nav>

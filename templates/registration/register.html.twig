@@ -1,0 +1,73 @@
+{% extends 'auth_base.html.twig' %}
+
+{# Page Meta title #}
+{% set title = "Créer un compte" %}
+{% set description = "S'inscrire" %}
+{% set keywords = "concours, ecole, université" %}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+
+{% block content %}
+	<h4 class="text-center">StudentDocs</h4>
+	<h6 class="text-center font-weight-light">Inscrivez-vous</h6>
+	{{form_start(registrationForm) }}
+	{{form_widget(registrationForm._token) }}
+	<div class="form-group">
+		<label class="form-control-label">Nom & Prénoms</label>
+		{{form_widget(registrationForm.fullName, {"attr":{"class": "form-control", "placeholder":"Ex: Hugues Kouye"}}) }}
+	</div>
+    <div class="form-group">
+		<label class="form-control-label">Email</label>
+		{{form_widget(registrationForm.email, {"attr":{"class": "form-control", "placeholder":"Email"}}) }}
+	</div>
+	<div class="form-group">
+		<label class="form-control-label">Mot de passe</label>
+		{{form_widget(registrationForm.plainPassword, {"attr":{"class": "form-control"}}) }}
+	</div>
+    <label class="form-control-label">Terms et conditions</label> {{ form_widget(registrationForm.agreeTerms) }}
+	<div class="text-center">
+		<button type="submit" class="btn btn-primary my-4">S'inscrire</button>
+	</div>
+	<div class="text-center mt-4 font-weight-light">
+		<a href="{{path('app_login')}}" class="text-primary">Se connecter</a>
+	</div>
+	{{form_end(registrationForm, {render_rest: false}) }}
+{% endblock %}
+
+
+
+

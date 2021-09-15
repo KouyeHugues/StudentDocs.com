@@ -1,0 +1,73 @@
+{% extends 'frontend_base.html.twig' %}
+
+{# Page Meta title #}
+{% set title = " Les écoles" %}
+{% set description = "La liste des écoles" %}
+{% set keywords = " Bénin, epreuves, pdf, université, école, filière"%}
+
+{# Page Meta title #}
+{% block title %}
+	{{title}}
+{% endblock %}
+{% block fb_title %}
+	{{title}}
+{% endblock %}
+{% block twitter_title %}
+	{{title}}
+{% endblock %}
+
+{# Page Body class #}
+{% block body_class %}{% endblock %}
+
+{# Page meta informations #}
+{% block descriptions %}
+	{{description}}
+{% endblock %}
+{% block schema_description %}
+	{{description}}
+{% endblock %}
+{% block twitter_description %}
+	{{description}}
+{% endblock %}
+{% block open_graph_description %}
+	{{description}}
+{% endblock %}
+{% block keywords %}
+	{{keywords}}
+{% endblock %}
+
+{% block og_image %}
+	
+{% endblock %}
+
+{% block content %}
+{% for school in schools %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <img src="{{ asset("uploads/logo/" ~ school.logo) }}" alt="{{school.name}}">
+                        <div class="card-body p-2">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">{{ school.name }}</h5>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{ path('app_exams_from_school_home', {'id': school.id}) }}">Visiter les examens </a></div>
+                </div>
+                </div>
+            </div>
+{% else %}
+    <div class="text-center">
+        <h4>Aucune école trouvée </h4>
+    </div>
+{% endfor %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+

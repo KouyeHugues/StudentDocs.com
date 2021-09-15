@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block stylesheets %}
+{{ parent() }}
+
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/feather/feather.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/ti-icons/css/themify-icons.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/css/vendor.bundle.base.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/css/vertical-layout-light/style.css')}}">
+	<link rel="stylesheet" href="{{asset('themes/back/vendors/mdi/css/materialdesignicons.min.css')}}"/>
+{% endblock %}
+
+
+{% block body %}
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-center py-5 px-4 px-sm-5">
+              <div class="brand-logo center">
+                <a href="{{path('app_home')}}"><img src="{{ asset('img/logo.jpg')}}" alt="logo"></a>
+              </div>
+			  {% block content %}{% endblock %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	<script src="{{asset('themes/back/js/off-canvas.js')}}"></script>
+	<script src="{{asset('themes/back/js/hoverable-collapse.js')}}"></script>
+	<script src="{{asset('themes/back/js/template.js')}}"></script>
+{% endblock %}

@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_competition_delete', {'id': competition.id}) }}" onsubmit="return confirm('Voulez vous vraiment supprimer ce concours ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ competition.id) }}">
+    <button  title="Supprimer du système" class="btn badge badge-danger">Supprimer</button>
+</form>

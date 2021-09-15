@@ -1,0 +1,4 @@
+<form method="post" action="{{ path('app_competition_activate', {'id': competition.id}) }}" onsubmit="return confirm('Voulez vous activer ce concours ?');">
+    <input type="hidden" name="_token" value="{{ csrf_token('activate' ~ competition.id) }}">
+   <button title="Activer pour le rendre public" class="btn badge badge-success">Activer</button>
+</form>
