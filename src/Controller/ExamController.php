@@ -23,7 +23,7 @@ class ExamController extends AbstractController
     public function home(ExamRepository $examRepository, PaginatorInterface $paginator, Request $request): Response
     {
         return $this->render('exam/home.html.twig', [
-            'exams' => $paginator->paginate($examRepository->getAllWithQueryBuilder(), $request->query->getInt('page', 1), 4)
+            'exams' => $paginator->paginate($examRepository->getAllWithQueryBuilder(), $request->query->getInt('page', 1), 10)
         ]);
     }
 
