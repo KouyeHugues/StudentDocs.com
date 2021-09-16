@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\University;
 use App\Form\UniversityType;
 use App\Repository\UniversityRepository;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,18 +16,19 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 class UniversityController extends AbstractController
 {
     #[Route('/', name: 'app_university_home', methods: ['GET'])]
-    public function home(UniversityRepository $universityRepository): Response
+    public function home(UniversityRepository $universityRepository, PaginatorInterface $paginator, Request $request): Response
     {
         return $this->render('university/home.html.twig', [
-            'universities' => $universityRepository->getAllWithQueryBuilder(),
+            'universities' => $paginator->paginate($universityRepository->getAllWithQueryBuilder(), $request->query->getInt('page', 1), 3)
         ]);
     }
 
     #[Route('/list', name: 'app_university_index', methods: ['GET']), isGranted('ROLE_ADMIN')]
-    public function index(UniversityRepository $universityRepository): Response
+    public function index(UniversityRepository $universityRepository, PaginatorInterface $paginator, Request $request): Response
     {
         return $this->render('university/index.html.twig', [
-            'universities' => $universityRepository->findAll(),
+            'universities' => $paginator->paginate($universityRepository->findAll(), $request->query->getInt('page', 1), 10)
+
         ]);
     }
 

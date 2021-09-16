@@ -6,6 +6,7 @@ use App\Entity\Competition;
 use App\Form\CompetitionType;
 use App\Repository\CompetitionRepository;
 use App\Service\FileUploader;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,18 +17,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class CompetitionController extends AbstractController
 {
     #[Route('/', name: 'app_competition_home', methods: ['GET'])]
-    public function home(CompetitionRepository $competitionRepository): Response
+    public function home(CompetitionRepository $competitionRepository, PaginatorInterface $paginator, Request $request): Response
     {
         return $this->render('competition/home.html.twig', [
-            'competitions' => $competitionRepository->getAllWithQueryBuilder(),
+            'competitions' => $paginator->paginate($competitionRepository->getAllWithQueryBuilder(), $request->query->getInt('page', 1), 10)
         ]);
     }
 
     #[Route('/list', name: 'app_competition_index', methods: ['GET']), isGranted('ROLE_ADMIN')]
-    public function index(CompetitionRepository $competitionRepository): Response
+    public function index(CompetitionRepository $competitionRepository, PaginatorInterface $paginator, Request $request): Response
     {
         return $this->render('competition/index.html.twig', [
-            'competitions' => $competitionRepository->findAll(),
+            'competitions' => $paginator->paginate($competitionRepository->findAll(), $request->query->getInt('page', 1), 10)
         ]);
     }
 
@@ -40,8 +41,7 @@ class CompetitionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $competitionFile = $form->get('fileName')->getData();
-            if($competitionFile)
-            {
+            if ($competitionFile) {
                 $competitionFileName = $fileUploader->upload($competitionFile);
                 $competition->setFileName($competitionFileName);
             }
@@ -68,8 +68,7 @@ class CompetitionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $competitionFile = $form->get('fileName')->getData();
-            if($competitionFile)
-            {
+            if ($competitionFile) {
                 $competitionFileName = $fileUploader->upload($competitionFile);
                 $competition->setFileName($competitionFileName);
             }
@@ -88,7 +87,7 @@ class CompetitionController extends AbstractController
     #[Route('/{id}', name: 'app_competition_delete', methods: ['POST']), isGranted('ROLE_ADMIN')]
     public function delete(Request $request, Competition $competition): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$competition->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $competition->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($competition);
             $entityManager->flush();
@@ -100,7 +99,7 @@ class CompetitionController extends AbstractController
     #[Route('/activate/{id}', name: 'app_competition_activate', methods: ['POST']), isGranted('ROLE_ADMIN')]
     public function activate(Request $request, Competition $competition): Response
     {
-        if ($this->isCsrfTokenValid('activate'.$competition->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('activate' . $competition->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $competition->setIsActive(true);
             $competition->setUpdatedAt(new \DateTime());
@@ -114,7 +113,7 @@ class CompetitionController extends AbstractController
     #[Route('/desactivate/{id}', name: 'app_competition_desactivate', methods: ['POST']), isGranted('ROLE_ADMIN')]
     public function desactivate(Request $request, Competition $competition): Response
     {
-        if ($this->isCsrfTokenValid('desactivate'.$competition->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('desactivate' . $competition->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $competition->setIsActive(false);
             $competition->setUpdatedAt(new \DateTime());
