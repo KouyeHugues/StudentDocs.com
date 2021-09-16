@@ -115,11 +115,10 @@
 								{% endfor %}
 							</tbody>
 						</table> <br>
-						{{ knp_pagination_render(competitions, null, {}, {
-   'align': 'center',
-   'size': 'large',
-   'rounded': true,
-}) }}
+						<div class="d-flex justify-content-center">
+							{% do competitions.setPageRange(2) %}
+							{{ knp_pagination_render(competitions, 'partials/_pagination.html.twig') }}
+						</div>
 					</div>
 				</div>
 			</div>

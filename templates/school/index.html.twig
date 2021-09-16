@@ -119,11 +119,10 @@
 								{% endfor %}
 							</tbody>
 						</table> <br>
-						{{ knp_pagination_render(schools, null, {}, {
-   'align': 'center',
-   'size': 'large',
-   'rounded': true,
-}) }}
+						<div class="d-flex justify-content-center">
+							{% do schools.setPageRange(2) %}
+							{{ knp_pagination_render(schools, 'partials/_pagination.html.twig') }}
+						</div>
 					</div>
 				</div>
 			</div>

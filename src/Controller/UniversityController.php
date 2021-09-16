@@ -19,7 +19,7 @@ class UniversityController extends AbstractController
     public function home(UniversityRepository $universityRepository, PaginatorInterface $paginator, Request $request): Response
     {
         return $this->render('university/home.html.twig', [
-            'universities' => $paginator->paginate($universityRepository->getAllWithQueryBuilder(), $request->query->getInt('page', 1), 3)
+            'universities' => $paginator->paginate($universityRepository->getAllWithQueryBuilder(), $request->query->getInt('page', 1), 10)
         ]);
     }
 
