@@ -21,7 +21,7 @@ class CompetitionType extends AbstractType
                 'label' => 'Fichier de du concours',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '8192k',

@@ -24,7 +24,7 @@ class ExamType extends AbstractType
                 'label' => 'Fichier de l\'examen',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'constraints' => [
                     new File([
                         'maxSize' => '8192k',

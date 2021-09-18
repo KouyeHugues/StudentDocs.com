@@ -20,7 +20,7 @@ class UniversityType extends AbstractType
                 'label' => 'Logo de l\'université',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'attr'     => [
                     'accept' => 'image/*',
                 ],

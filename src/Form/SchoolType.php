@@ -22,7 +22,7 @@ class SchoolType extends AbstractType
                 'label' => 'Logo de l\'école',
                 // unmapped means that this field is not associated to any entity property
                 'mapped' => false,
-                'required' => false,
+                'required' => true,
                 'attr'     => [
                     'accept' => 'image/*',
                 ],
